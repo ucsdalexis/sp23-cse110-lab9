@@ -7,6 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 9</title>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "ffd1d76e412b415fb6f6be04591c2151"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                          
+
   <style>
     button {
       margin: 3px;
@@ -102,6 +111,148 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    // Step 2
+    // Log
+    errorBtns[0].addEventListener('click', () => {
+      console.log('You have triggered a console log');
+    });
+
+    // Error
+    errorBtns[1].addEventListener('click', () => {
+      console.error('You have triggered an error');
+    });
+
+    // Count
+    errorBtns[2].addEventListener('click', () => {
+      console.count('You have pressed this button this many times');
+    });
+
+    // Warn
+    errorBtns[3].addEventListener('click', () => {
+      console.warn('You have triggered a warning message');
+    });
+
+    // Assert
+    errorBtns[4].addEventListener('click', () => {
+      console.assert(false, 'You have triggered an assertion message because false is not true');
+    });
+
+    // Clear
+    errorBtns[5].addEventListener('click', () => {
+      console.clear();
+    });
+
+    // Dir
+    errorBtns[6].addEventListener('click', () => {
+      console.dir(errorBtns[6]);
+    });
+
+    // Dirxml
+    errorBtns[7].addEventListener('click', () => {
+      console.dirxml(document.querySelector('button'));
+    });
+
+    // Group Start
+    errorBtns[8].addEventListener('click', () => {
+      console.group('You have created a group');
+      console.log('You have found the start of the group');
+    });
+
+    // Group End
+    errorBtns[9].addEventListener('click', () => {
+      console.log('You have found the end of the group');
+      console.groupEnd();
+    });
+
+    // Table
+    errorBtns[10].addEventListener('click', () => {
+      let randomData = [
+        {name: 'Lorem ipsum 1', id: 'A666'},
+        {name: 'Lorem ipsum 2', id: 'B666'},
+        {name: 'Lorem ipsum 3', id: 'C666'},
+        {name: 'Lorem ipsum 4', id: 'D666'},
+        {name: 'Lorem ipsum 5', id: 'E666'}
+      ]
+      console.table(randomData);
+    });
+
+    // Start Timer
+    let timerName;
+    let count = 1;
+    errorBtns[11].addEventListener('click', () => {
+      timerName = 'Timer ' + count;
+      console.time(timerName);
+    });
+
+    // End Timer
+    errorBtns[12].addEventListener('click', () => {
+      console.timeEnd(timerName);
+      count += 1;
+    });
+
+    // Trace
+    errorBtns[13].addEventListener('click', () => {
+      function end() {
+        function start() {
+          console.trace();
+        }
+        start();
+      }
+      end();
+    });
+
+    // Trigger a Global Error
+    errorBtns[14].addEventListener('click', () => {
+      throw new Error('You broke something GLOBALLY')
+    });
+
+    // Step 3
+    try {
+      const randomArr = [1,2,3,4,5];
+      if (randomArr.length % 2 !== 0) {
+        throw new Error('array is not even length')
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+    finally {
+      console.log('try/catch block finished!')
+    }
+
+    // Step 4
+    class FakeError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'FakeError';
+      }
+    }
+    
+    try {
+      if (1 !== 2) {
+        throw new FakeError('You are giving me a false statement')
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
+    finally {
+      console.log('2nd try/catch block finished!')
+    }
+
+    // Step 5
+    errorBtns[14].addEventListener('click', () => {
+      let firstNum = document.querySelector('#first-num').value = 'a';
+      let operator = document.querySelector('#operator').value = '-';
+      let secondNum = document.querySelector('#second-num').value = 'b';
+      let calculateBtn = document.querySelector('#calculate');
+      calculateBtn.click(); 
+
+      console.log('You caused an error');
+    })
+
+    TrackJS.track('Testing TrackJS!');
   </script>
 </body>
 
